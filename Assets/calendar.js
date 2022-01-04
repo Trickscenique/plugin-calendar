@@ -34,7 +34,7 @@ KB.component('calendar', function (containerElement, options) {
 					data: JSON.stringify({
 						task_id: event.id,
 						date_due: event.end.format(),
-						date_created: event.start.format(),
+						date_started: event.start.format(),
 					}),
 				});
 			},
@@ -48,7 +48,7 @@ KB.component('calendar', function (containerElement, options) {
 					data: JSON.stringify({
 						task_id: event.id,
 						date_due: event.end.format(),
-						date_created: event.start.format(),
+						date_started: event.start.format(),
 					}),
 				});
 			},
