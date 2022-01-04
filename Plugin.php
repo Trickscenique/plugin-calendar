@@ -60,7 +60,7 @@ class Plugin extends Base
 
     public function getPluginHomepage()
     {
-        return 'https://github.com/kanboard/plugin-calendar';
+        return 'https://github.com/Trickscenique/plugin-calendar';
     }
 
     public function getCompatibleVersion()
