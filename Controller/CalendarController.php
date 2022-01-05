@@ -67,6 +67,7 @@ class CalendarController extends BaseController
             'project_id' => $projectId,
             'start' => $startRange,
             'end' => $endRange,
+            "editable" => true
         ));
 
         $this->response->json($events);
@@ -116,7 +117,7 @@ class CalendarController extends BaseController
             $this->taskModificationModel->update(array(
                 'id' => $values['task_id'],
                 'date_due' => substr($values['date_due'], 0, 10),
-                'date_created' => substr($values['date_created'], 0, 10),
+                'date_started' => substr($values['date_started'], 0, 10),
             ));
         }
     }
