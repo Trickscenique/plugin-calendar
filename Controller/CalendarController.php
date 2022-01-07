@@ -77,10 +77,10 @@ class CalendarController extends BaseController
             if ($events[$key]['backgroundColor'] === null) {
                 $parentTask  = $this->taskFinderModel->getById($tmp_subtask['id']);
                 if (!isset($subtasks[$tmp_subtask['id']])) {
-                    $subtasks[$subtasks[$tmp_subtask['id']]] = $this->subtaskModel->getAll($tmp_subtask['id']);
+                    $subtasks[$tmp_subtask['id']] = $this->subtaskModel->getAll($tmp_subtask['id']);
                 }
 
-                $subtask = array_filter($subtasks[$subtasks[$tmp_subtask['id']]], function ($element) use ($tmp_subtask, $parentTask) {
+                $subtask = array_filter($subtasks[$tmp_subtask['id']], function ($element) use ($tmp_subtask, $parentTask) {
                     return t('#%d', $parentTask['id']).' '.$element['title'] == $tmp_subtask['title'];
                 });
 
