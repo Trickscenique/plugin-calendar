@@ -84,6 +84,8 @@ class CalendarController extends BaseController
                     return (t('#%d', $parentTask['id']).' '.$element['title'] == $tmp_subtask['title']);
                 }, ARRAY_FILTER_USE_BOTH);
 
+                $this->response->json($subtask);
+                die();
                 $ref = "subtask";
                 $color = $parentTask['color_id'];
                 $events[$key]['id'] = $ref."-".$subtask[0]['id'];
