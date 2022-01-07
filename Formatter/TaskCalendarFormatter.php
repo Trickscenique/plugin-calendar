@@ -92,6 +92,10 @@ class TaskCalendarFormatter extends BaseFormatter implements FormatterInterface
                 $color = $parentTask['color_id'];
             }
 
+            if ($color == null) {
+                $color = $this->colorModel->getBackgroundColor($task['color_id']);
+            }
+
             $id = $ref."-".$task['id'];
 
             $events[] = array(

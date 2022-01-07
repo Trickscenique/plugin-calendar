@@ -88,6 +88,11 @@ class CalendarController extends BaseController
 
                 $ref = "subtask";
                 $color = $parentTask['color_id'];
+
+                if ($color == null) {
+                    $color = $this->colorModel->getBackgroundColor($parentTask['color_id']);
+                }
+
                 $events[$key]['id'] = $ref."-".$subtask['id'];
                 $events[$key]['backgroundColor'] = $color;
                 $events[$key]['borderColor'] =  "black";
