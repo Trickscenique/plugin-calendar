@@ -51,14 +51,6 @@ class CalendarController extends BaseController
             ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
             ->format($this->taskCalendarFormatter->setColumns('date_due'));
 
-        foreach ($dueDateOnlyEvents as $key => $subtask) {
-            $parentTask  = $this->taskFinderModel->getById($subtask['id']);
-            $ref = "subtask";
-            $color = $parentTask['color_id'];
-            $dueDateOnlyEvents[$key]['id'] = $ref."-".$dueDateOnlyEvents[$key]['id'];
-            $dueDateOnlyEvents[$key]['backgroundColor'] = $color;
-            $dueDateOnlyEvents[$key]['borderColor'] =  $color;
-        }
 
         $startAndDueDateQueryBuilder = $this->taskLexer->build($search)
             ->withFilter(new TaskProjectFilter($projectId));
@@ -79,6 +71,18 @@ class CalendarController extends BaseController
             'end' => $endRange,
             "editable" => true
         ));
+
+        foreach ($events as $key => $subtask) {
+            if ($dueDateOnlyEvents[$key]['backgroundColor'] === null) {
+                $parentTask  = $this->taskFinderModel->getById($subtask['id']);
+                $ref = "subtask";
+                $color = $parentTask['color_id'];
+                $dueDateOnlyEvents[$key]['id'] = $ref."-".$dueDateOnlyEvents[$key]['id'];
+                $dueDateOnlyEvents[$key]['backgroundColor'] = $color;
+                $dueDateOnlyEvents[$key]['borderColor'] =  $color;
+            }
+        }
+
 
         $this->response->json($events);
     }
