@@ -80,7 +80,7 @@ class TaskCalendarFormatter extends BaseFormatter implements FormatterInterface
                 $endDate->setTimestamp($task[$this->effectiveEndColumn]);
             }
 
-            $diff = $startDate->diff($endDate, true)
+            $diff = $startDate->diff($endDate, true);
             $allDay = ($diff->format("%a") >= 1);
             $format = $allDay ? 'Y-m-d' : 'Y-m-d\TH:i:s';
 
