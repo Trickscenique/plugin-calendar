@@ -99,7 +99,7 @@ class TaskCalendarFormatter extends BaseFormatter implements FormatterInterface
                 'id' => $id,
                 'title' => t('#%d', $task['id']).' '.$task['title'],
                 'backgroundColor' =>$color,
-                'borderColor' => $color,
+                'borderColor' => "black",
                 'textColor' => 'black',
                 'url' => $this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
                 'start' => $startDate->format($format),
