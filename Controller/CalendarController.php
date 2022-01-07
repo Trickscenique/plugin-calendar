@@ -51,6 +51,17 @@ class CalendarController extends BaseController
             ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
             ->format($this->taskCalendarFormatter->setColumns('date_due'));
 
+        foreach ($dueDateOnlyEvents as &$subtask) {
+            $color = $subtask['color_id'] ?? null;
+            if ($color == null) {
+                $parentTask  = $this->taskFinderModel->getById($subtask['id']);
+                $ref = "subtask";
+                $color = $parentTask['color_id'];
+                $subtask['id'] = $ref."-".$subtask['id'];
+                $subtask['backgroundColor'] = $color;
+                $subtask['borderColor'] =  $color;
+            }
+        }
         $startAndDueDateQueryBuilder = $this->taskLexer->build($search)
             ->withFilter(new TaskProjectFilter($projectId));
 
