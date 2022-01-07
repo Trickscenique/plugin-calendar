@@ -89,7 +89,7 @@ class CalendarController extends BaseController
                 $ref = "subtask";
                 $color = $parentTask['color_id'];
 
-                if ($color == null) {
+                if ($color == null || is_int($color)) {
                     $color = $this->colorModel->getBackgroundColor($parentTask['color_id']);
                 }
 
