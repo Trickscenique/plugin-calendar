@@ -84,12 +84,22 @@ class TaskCalendarFormatter extends BaseFormatter implements FormatterInterface
             $allDay = ($diff->format("%a") >= 1);
             $format = $allDay ? 'Y-m-d' : 'Y-m-d\TH:i:s';
 
+            $ref = "task";
+            $color = $task['color_id'] ?? null;
+            if (!isset($task['color_id'])) {
+                $parentTask  = $this->taskFinderModel->getById($task['task_id']);
+                $ref = "subtask";
+                $color = $parentTask['color_id'];
+            }
+
+            $id = $ref."-".$task['id'];
+
             $events[] = array(
                 'timezoneParam' => $this->timezoneModel->getCurrentTimezone(),
-                'id' => $task['id'],
+                'id' => $id,
                 'title' => t('#%d', $task['id']).' '.$task['title'],
-                'backgroundColor' =>$task['color_id'],
-                'borderColor' => $task['color_id'],
+                'backgroundColor' =>$color,
+                'borderColor' => $color,
                 'textColor' => 'black',
                 'url' => $this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
                 'start' => $startDate->format($format),
