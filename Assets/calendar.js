@@ -25,6 +25,7 @@ KB.component('calendar', function (containerElement, options) {
 				right: 'month,agendaWeek,agendaDay',
 			},
 			eventDrop: function (event) {
+				console.log(event);
 				$.ajax({
 					cache: false,
 					url: options.saveUrl,
