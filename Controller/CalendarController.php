@@ -79,8 +79,8 @@ class CalendarController extends BaseController
                 if (!isset($subtasks[$tmp_subtask['id']])) {
                     $subtasks[$subtasks[$tmp_subtask['id']]] = $this->subtaskModel->getAll($tmp_subtask['id']);
                 }
-                $subtask = array_filter($subtasks, function ($element) use ($tmp_subtask) {
-                    return t('#%d', $element['id']).' '.$element['title'] == $tmp_subtask['title'];
+                $subtask = array_filter($subtasks, function ($element) use ($tmp_subtask, $parentTask) {
+                    return t('#%d', $parentTask['id']).' '.$element['title'] == $tmp_subtask['title'];
                 });
 
                 $ref = "subtask";
