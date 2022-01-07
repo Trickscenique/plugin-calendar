@@ -72,12 +72,20 @@ class CalendarController extends BaseController
             "editable" => true
         ));
 
-        foreach ($events as $key => $subtask) {
+        $subtasks = [];
+        foreach ($events as $key => $tmp_subtask) {
             if ($events[$key]['backgroundColor'] === null) {
-                $parentTask  = $this->taskFinderModel->getById($subtask['id']);
+                $parentTask  = $this->taskFinderModel->getById($tmp_subtask['id']);
+                if (!isset($subtasks[$tmp_subtask['id']])) {
+                    $subtasks[$subtasks[$tmp_subtask['id']]] = $this->subtaskModel->getAll($tmp_subtask['id']);
+                }
+                $subtask = array_filter($subtasks, function ($element) use ($tmp_subtask) {
+                    return t('#%d', $element['id']).' '.$element['title'] == $tmp_subtask['title'];
+                });
+
                 $ref = "subtask";
                 $color = $parentTask['color_id'];
-                $events[$key]['id'] = $ref."-".$events[$key]['id'];
+                $events[$key]['id'] = $ref."-".$subtask['id'];
                 $events[$key]['backgroundColor'] = $color;
                 $events[$key]['borderColor'] =  $color;
             }
