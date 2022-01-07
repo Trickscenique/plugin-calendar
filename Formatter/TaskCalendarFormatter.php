@@ -86,7 +86,7 @@ class TaskCalendarFormatter extends BaseFormatter implements FormatterInterface
 
             $ref = "task";
             $color = $task['color_id'] ?? null;
-            if ($color === null) {
+            if ($color == null) {
                 $parentTask  = $this->taskFinderModel->getById($task['task_id']);
                 $ref = "subtask";
                 $color = $parentTask['color_id'];

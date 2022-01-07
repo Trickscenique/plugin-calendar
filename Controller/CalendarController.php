@@ -62,7 +62,7 @@ class CalendarController extends BaseController
             ->format($this->taskCalendarFormatter->setColumns($startColumn, 'date_due', 'date_completed'));
 
 
-        $events = array_merge($dueDateOnlyEvents);
+        $events = array_merge($dueDateOnlyEvents, $startAndDueDateEvents);
 
         $events = $this->hook->merge('controller:calendar:project:events', $events, array(
             'project_id' => $projectId,
