@@ -25,7 +25,9 @@ KB.component('calendar', function (containerElement, options) {
 				right: 'month,agendaWeek,agendaDay',
 			},
 			eventDrop: function (event) {
-				console.log(event);
+				if (event.end == null) {
+					event.end = event.start.add(4, 'h');
+				}
 				$.ajax({
 					cache: false,
 					url: options.saveUrl,
@@ -40,6 +42,9 @@ KB.component('calendar', function (containerElement, options) {
 				});
 			},
 			evenResize: function (event) {
+				if (event.end == null) {
+					event.end = event.start.add(4, 'h');
+				}
 				$.ajax({
 					cache: false,
 					url: options.saveUrl,
