@@ -73,13 +73,13 @@ class CalendarController extends BaseController
         ));
 
         foreach ($events as $key => $subtask) {
-            if ($dueDateOnlyEvents[$key]['backgroundColor'] === null) {
+            if ($events[$key]['backgroundColor'] === null) {
                 $parentTask  = $this->taskFinderModel->getById($subtask['id']);
                 $ref = "subtask";
                 $color = $parentTask['color_id'];
-                $dueDateOnlyEvents[$key]['id'] = $ref."-".$dueDateOnlyEvents[$key]['id'];
-                $dueDateOnlyEvents[$key]['backgroundColor'] = $color;
-                $dueDateOnlyEvents[$key]['borderColor'] =  $color;
+                $events[$key]['id'] = $ref."-".$events[$key]['id'];
+                $events[$key]['backgroundColor'] = $color;
+                $events[$key]['borderColor'] =  $color;
             }
         }
 
