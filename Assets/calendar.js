@@ -22,7 +22,7 @@ KB.component('calendar', function (containerElement, options) {
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay',
+				right: 'month,agendaWeek,agendaDay,listWeek',
 			},
 			eventDrop: function (event) {
 				if (event.end == null) {
